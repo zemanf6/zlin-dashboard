@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { CloudSun, ExternalLink, LogOut, UserRound } from "lucide-react";
 import "../styles/appHeader.css";
 
@@ -13,20 +14,22 @@ const headerLinks = [
 ];
 
 export function AppHeader() {
+  const logoSrc = `${import.meta.env.BASE_URL}images/portal-obcana-logo.png`;
+
   return (
     <header className="app-header">
       <div className="app-header__left">
-        <a
+        <Link
           className="app-header__brand"
-          href="/"
-          aria-label="Portál občana Zlín"
+          to="/"
+          aria-label="Portál Zlíňáka"
         >
           <img
             className="app-header__logo"
-            src="/images/portal-obcana-logo.png"
-            alt="Zlín portál občana"
+            src={logoSrc}
+            alt="Zlín portál Zlíňáka"
           />
-        </a>
+        </Link>
 
         <nav className="app-header__links" aria-label="Hlavní odkazy">
           {headerLinks.map((link) => (
@@ -50,7 +53,7 @@ export function AppHeader() {
           <span>26.4 °C | 18. 6. 2026</span>
         </div>
 
-        <a className="app-header__profile-link" href="/profil">
+        <Link className="app-header__profile-link" to="/profil">
           <span className="app-header__profile-icon" aria-hidden="true">
             <UserRound size={20} strokeWidth={1.9} />
           </span>
@@ -58,7 +61,7 @@ export function AppHeader() {
             <span className="app-header__profile-label">Můj profil</span>
             <span className="app-header__profile-name">Jan Novák</span>
           </span>
-        </a>
+        </Link>
 
         <button className="app-header__logout-button" type="button">
           <LogOut size={19} strokeWidth={1.9} aria-hidden="true" />
