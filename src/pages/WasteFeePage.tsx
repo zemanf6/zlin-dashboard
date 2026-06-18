@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import {
   ArrowLeft,
-  Building2,
   CalendarDays,
   CreditCard,
   FileCheck2,
