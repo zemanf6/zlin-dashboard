@@ -1,4 +1,4 @@
-import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AppHeader } from "./components/AppHeader";
 import { AppointmentPage } from "./pages/AppointmentPage";
 import { DashboardPage } from "./pages/DashboardPage";
@@ -6,7 +6,7 @@ import { WasteFeePage } from "./pages/WasteFeePage";
 
 export default function App() {
   return (
-    <Router>
+    <HashRouter>
       <AppHeader />
 
       <Routes>
@@ -15,6 +15,6 @@ export default function App() {
         <Route path="/poplatek-za-odpad" element={<WasteFeePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </Router>
+    </HashRouter>
   );
 }
