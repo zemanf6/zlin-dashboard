@@ -1,0 +1,283 @@
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 98px;
+  padding: 0 34px;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid #e8edf2;
+  box-shadow: 0 1px 0 rgba(0, 75, 135, 0.04);
+  backdrop-filter: blur(8px);
+}
+
+.app-header__left {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 34px;
+}
+
+.app-header__brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  border-radius: 4px;
+  color: #004b87;
+  text-decoration: none;
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.app-header__brand:hover {
+  opacity: 0.88;
+}
+
+.app-header__brand:active {
+  transform: translateY(1px);
+}
+
+.app-header__brand:focus-visible,
+.app-header__link:focus-visible,
+.app-header__profile-link:focus-visible,
+.app-header__logout-button:focus-visible {
+  outline: 3px solid rgba(255, 211, 0, 0.9);
+  outline-offset: 4px;
+}
+
+.app-header__logo {
+  display: block;
+  width: 207px;
+  height: auto;
+}
+
+.app-header__links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.app-header__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 42px;
+  color: #333333;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 140ms ease;
+}
+
+.app-header__link::after {
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  left: 0;
+  height: 2px;
+  background: #ffd300;
+  content: "";
+  opacity: 0;
+  transform: scaleX(0.85);
+  transform-origin: left;
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.app-header__link:hover {
+  color: #004b87;
+}
+
+.app-header__link:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.app-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  color: #222222;
+  font-size: 15px;
+}
+
+.app-header__weather {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 2px;
+  color: #2d2d2d;
+  white-space: nowrap;
+}
+
+.app-header__weather svg {
+  color: #202020;
+}
+
+.app-header__profile-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 4px 0;
+  color: #222222;
+  text-decoration: none;
+  transition: color 140ms ease;
+}
+
+.app-header__profile-link::after {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  left: 29px;
+  height: 2px;
+  background: #ffd300;
+  content: "";
+  opacity: 0;
+  transform: scaleX(0.85);
+  transform-origin: left;
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.app-header__profile-link:hover {
+  color: #004b87;
+}
+
+.app-header__profile-link:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.app-header__profile-link:active {
+  color: #003d6d;
+}
+
+.app-header__profile-icon {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  color: currentColor;
+}
+
+.app-header__profile-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.1;
+}
+
+.app-header__profile-label {
+  color: #666666;
+  font-size: 12px;
+}
+
+.app-header__profile-link:hover .app-header__profile-label {
+  color: #00558c;
+}
+
+.app-header__profile-name {
+  color: currentColor;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.app-header__logout-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #30363d;
+  cursor: pointer;
+  transition: color 140ms ease;
+}
+
+.app-header__logout-button:hover {
+  color: #004b87;
+}
+
+.app-header__logout-button:active {
+  color: #003d6d;
+}
+
+@media (max-width: 1180px) {
+  .app-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 34px;
+  }
+
+  .app-header__left {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .app-header__actions {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@media (max-width: 760px) {
+  .app-header {
+    padding: 24px;
+  }
+
+  .app-header__left,
+  .app-header__actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .app-header__links {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .app-header__logo {
+    width: 180px;
+  }
+
+  .app-header__weather,
+  .app-header__profile-link,
+  .app-header__logout-button {
+    justify-content: flex-start;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header__weather {
+    font-size: 14px;
+  }
+
+  .app-header__logout-button span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-header__brand,
+  .app-header__link,
+  .app-header__link::after,
+  .app-header__profile-link,
+  .app-header__profile-link::after,
+  .app-header__logout-button {
+    transition: none;
+  }
+}

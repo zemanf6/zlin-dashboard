@@ -1,0 +1,532 @@
+.waste-fee-page {
+  min-height: calc(100vh - 98px);
+  padding: 42px 34px 64px;
+  background: linear-gradient(180deg, #f7f9fb 0%, #eef3f7 100%);
+  color: #303030;
+}
+
+.waste-fee-page__inner {
+  width: min(1280px, 100%);
+  margin-inline: auto;
+}
+
+.waste-fee-page__back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  margin-bottom: 30px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #00558c;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.waste-fee-page__back-button:hover {
+  color: #003f6a;
+}
+
+.waste-fee-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 34px;
+  align-items: end;
+  margin-bottom: 30px;
+}
+
+.waste-fee-hero__eyebrow,
+.waste-card__eyebrow {
+  margin: 0 0 8px;
+  color: #00558c;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.waste-fee-hero h1 {
+  margin: 0;
+  color: #333333;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.waste-fee-hero__text {
+  max-width: 760px;
+  margin: 18px 0 0;
+  color: #5b6168;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.waste-fee-summary-card {
+  padding: 24px;
+  border: 1px solid #dce6ee;
+  border-top: 4px solid #f0b400;
+  background: #ffffff;
+}
+
+.waste-fee-summary-card span {
+  display: block;
+  margin-bottom: 8px;
+  color: #6a737d;
+  font-size: 14px;
+}
+
+.waste-fee-summary-card strong {
+  display: block;
+  color: #2f3439;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.waste-fee-summary-card p {
+  margin: 10px 0 0;
+  color: #00558c;
+  font-weight: 800;
+}
+
+.waste-fee-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 24px;
+  align-items: start;
+}
+
+.waste-fee-main {
+  display: grid;
+  gap: 20px;
+}
+
+.waste-card,
+.payment-panel {
+  border: 1px solid #dce6ee;
+  background: #ffffff;
+  box-shadow: 0 14px 34px rgba(0, 75, 135, 0.045);
+}
+
+.waste-card {
+  padding: 24px;
+}
+
+.waste-card__header,
+.payment-panel__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.waste-card__icon,
+.payment-panel__icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  background: #eef5fb;
+  color: #00558c;
+}
+
+.waste-card h2,
+.payment-panel h2 {
+  margin: 0;
+  color: #2f3439;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.payer-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.payer-toggle__button {
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid #cbddea;
+  background: #ffffff;
+  color: #00558c;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.payer-toggle__button--active {
+  border-color: #00558c;
+  background: #00558c;
+  color: #ffffff;
+}
+
+.payer-preview {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  background: #f7f9fb;
+  color: #3f4851;
+}
+
+.payer-preview strong {
+  color: #2f3439;
+}
+
+.other-payer-form {
+  display: grid;
+  gap: 12px;
+}
+
+.other-payer-form label {
+  display: grid;
+  gap: 7px;
+  color: #4f565d;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.other-payer-form input {
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid #cbddea;
+  background: #ffffff;
+}
+
+.other-payer-form p {
+  margin: 0;
+  color: #5e6770;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.fee-options {
+  display: grid;
+  gap: 12px;
+}
+
+.fee-option {
+  border: 1px solid #dce6ee;
+  background: #ffffff;
+}
+
+.fee-option--active {
+  border-color: #00558c;
+  box-shadow: inset 5px 0 0 #00558c;
+}
+
+.fee-option__select {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  width: 100%;
+  padding: 18px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fee-option__select strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #2f3439;
+  font-size: 17px;
+}
+
+.fee-option__select small {
+  display: block;
+  color: #5e6770;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.fee-option__select b {
+  color: #2f3439;
+  font-size: 20px;
+  white-space: nowrap;
+}
+
+.fee-option__info-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 18px 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #00558c;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.fee-option__info-button:hover {
+  color: #003f6a;
+}
+
+.fee-option__details {
+  margin: 0 18px 18px;
+  padding: 16px 18px;
+  border-left: 5px solid #f0b400;
+  background: #fff9df;
+}
+
+.fee-option__details h3 {
+  margin: 0 0 10px;
+  color: #2f3439;
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.fee-option__details ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.fee-option__details li {
+  color: #4a4432;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.attachment-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid #cbddea;
+  background: #f7f9fb;
+}
+
+.attachment-panel__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #00558c;
+}
+
+.attachment-panel__header div {
+  display: grid;
+  gap: 4px;
+}
+
+.attachment-panel__header strong {
+  color: #2f3439;
+  font-size: 15px;
+}
+
+.attachment-panel__header span {
+  color: #5e6770;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.attachment-panel__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid #00558c;
+  background: #00558c;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.waste-note {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+  padding: 16px;
+  border-left: 5px solid #f0b400;
+  background: #fff9df;
+  color: #4a4432;
+}
+
+.waste-note p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.deadline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.deadline-grid article {
+  padding: 16px;
+  background: #f7f9fb;
+}
+
+.deadline-grid strong,
+.deadline-grid span {
+  display: block;
+}
+
+.deadline-grid strong {
+  margin-bottom: 8px;
+  color: #2f3439;
+}
+
+.deadline-grid span {
+  color: #5e6770;
+  line-height: 1.45;
+}
+
+.payment-history {
+  display: grid;
+  gap: 10px;
+}
+
+.payment-history__item {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px;
+  background: #f7f9fb;
+}
+
+.payment-history__item div {
+  display: grid;
+  gap: 4px;
+}
+
+.payment-history__item strong,
+.payment-history__item b {
+  color: #2f3439;
+}
+
+.payment-history__item span {
+  color: #5e6770;
+  font-size: 14px;
+}
+
+.payment-panel {
+  position: sticky;
+  top: 122px;
+  padding: 24px;
+}
+
+.payment-panel__header p {
+  margin: 0 0 8px;
+  color: #00558c;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.payment-panel__amount {
+  margin-bottom: 20px;
+  padding: 18px;
+  background: #f7f9fb;
+}
+
+.payment-panel__amount span {
+  display: block;
+  margin-bottom: 8px;
+  color: #6a737d;
+  font-size: 14px;
+}
+
+.payment-panel__amount strong {
+  display: block;
+  color: #2f3439;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.payment-details {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 22px;
+}
+
+.payment-details div {
+  display: grid;
+  gap: 4px;
+}
+
+.payment-details dt {
+  color: #6a737d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.payment-details dd {
+  margin: 0;
+  color: #2f3439;
+  font-weight: 800;
+  word-break: break-word;
+}
+
+.qr-box {
+  display: grid;
+  place-items: center;
+  min-height: 170px;
+  border: 1px dashed #cbddea;
+  background: #ffffff;
+  color: #00558c;
+}
+
+.waste-fee-page__back-button:focus-visible,
+.payer-toggle__button:focus-visible,
+.fee-option__select:focus-visible,
+.fee-option__info-button:focus-visible,
+.attachment-panel__button:focus-visible {
+  outline: 3px solid rgba(255, 211, 0, 0.9);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1100px) {
+  .waste-fee-hero,
+  .waste-fee-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .waste-fee-page {
+    padding: 30px 20px 48px;
+  }
+
+  .payer-toggle,
+  .payment-history__item {
+    flex-direction: column;
+  }
+
+  .deadline-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fee-option__select {
+    grid-template-columns: 1fr;
+  }
+
+  .attachment-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .attachment-panel__button {
+    justify-content: center;
+    width: 100%;
+  }
+}
