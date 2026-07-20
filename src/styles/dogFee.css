@@ -1,0 +1,53 @@
+.dog-record { border: 1px solid #dce5ea; }
+.dog-record__identity { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 15px; background: #f7f9fb; }
+.dog-record__identity > span { display: grid; place-items: center; width: 44px; height: 44px; background: #e8f2f8; color: #00558c; }
+.dog-record__identity > div { display: grid; min-width: 0; gap: 4px; }
+.dog-record__identity small { overflow: hidden; color: #68737c; text-overflow: ellipsis; white-space: nowrap; }
+.dog-record__identity > b { padding: 5px 8px; background: #ddf3e8; color: #176b46; font-size: 10px; text-transform: uppercase; }
+.dog-record__details { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: #dfe6ea; border-top: 1px solid #dfe6ea; }
+.dog-record__details div { display: grid; gap: 4px; padding: 13px; background: #fff; }
+.dog-record__details span { color: #707b83; font-size: 11px; }
+.dog-record__details strong { font-size: 13px; }
+.dog-record__actions { display: flex; gap: 18px; padding: 12px 14px; border-top: 1px solid #e2e8ec; }
+.dog-record__actions button { display: inline-flex; align-items: center; gap: 6px; padding: 6px 0; border: 0; background: transparent; color: #00558c; cursor: pointer; font-size: 12px; font-weight: 800; }
+.dog-record__actions button:hover { color: #003f6a; text-decoration: underline; }
+.dog-add-button { display: flex; justify-content: center; align-items: center; gap: 8px; width: 100%; min-height: 44px; margin-top: 12px; padding: 0 14px; border: 1px solid #00558c; background: #fff; color: #00558c; cursor: pointer; font-weight: 900; }
+.dog-add-button:hover { background: #00558c; color: #fff; }
+.dog-rate-intro { margin: -5px 0 16px; color: #68737c; line-height: 1.5; }
+.dog-home-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.dog-home-options button { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 11px; align-items: center; padding: 16px; border: 2px solid #d7e1e7; background: #fff; color: #2f3439; cursor: pointer; text-align: left; }
+.dog-home-options button:hover { border-color: #8db5cc; background: #f8fbfd; }
+.dog-home-options button:focus-visible,
+.dog-record button:focus-visible,
+.dog-add-button:focus-visible,
+.dog-discount-info > button:focus-visible { outline: 3px solid rgb(255 211 0 / 90%); outline-offset: 3px; }
+.dog-home-options button.is-active { border-color: #00558c; background: #f0f7fb; box-shadow: inset 0 -4px 0 #00558c; }
+.dog-home-options button > span:first-child { display: grid; place-items: center; width: 46px; height: 46px; background: #e8f2f8; color: #00558c; }
+.dog-home-options button > span:nth-child(2) { display: grid; gap: 4px; }
+.dog-home-options button small { color: #68737c; line-height: 1.35; }
+.dog-home-options button > b { grid-column: 2; color: #00558c; font-size: 19px; }
+.dog-area-info { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 11px; margin-top: 14px; padding: 14px; background: #effaf4; color: #18734a; }
+.dog-area-info > span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #d7f0e3; }
+.dog-area-info > div { display: grid; gap: 4px; }
+.dog-area-info p { margin: 0; color: #536a5f; font-size: 13px; line-height: 1.45; }
+.dog-area-info small { color: #65776e; }
+.dog-rate-result { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-top: 14px; padding: 16px; border-left: 5px solid #f0b400; background: #fff9df; }
+.dog-rate-result > div { display: grid; gap: 4px; }
+.dog-rate-result span { color: #716b54; font-size: 12px; }
+.dog-rate-result > b { color: #00558c; font-size: 27px; white-space: nowrap; }
+.dog-info-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.dog-info-grid article { display: flex; gap: 12px; padding: 16px; background: #f7f9fb; }
+.dog-info-grid article > svg { flex: 0 0 auto; color: #00558c; }
+.dog-info-grid article div { display: grid; gap: 5px; }
+.dog-info-grid article span { color: #68737c; font-size: 11px; font-weight: 800; text-transform: uppercase; }
+.dog-info-grid article p { margin: 0; color: #65717a; font-size: 13px; line-height: 1.45; }
+.dog-discount-info { border: 1px solid #dce6ee; background: #fff; }
+.dog-discount-info > button { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 9px; align-items: center; width: 100%; padding: 15px 16px; border: 0; background: #fff; color: #00558c; cursor: pointer; font-weight: 800; text-align: left; }
+.dog-discount-info > button:hover { background: #f7fafc; }
+.dog-discount-info > button svg:last-child { transition: transform 150ms ease; }
+.dog-discount-info > button svg.is-open { transform: rotate(180deg); }
+.dog-discount-info > div { padding: 0 16px 16px 44px; color: #56646d; font-size: 13px; line-height: 1.5; }
+.dog-discount-info p { margin: 0 0 8px; }
+.dog-discount-info small { display: block; margin-top: 12px; padding: 10px; background: #edf6fb; color: #536773; }
+@media (max-width: 700px) { .dog-home-options, .dog-info-grid { grid-template-columns: 1fr; } .dog-record__details { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .dog-record__identity { grid-template-columns: auto minmax(0, 1fr); } .dog-record__identity > b { grid-column: 2; justify-self: start; } .dog-record__actions { align-items: flex-start; flex-direction: column; gap: 4px; } .dog-rate-result { align-items: flex-start; flex-direction: column; } }

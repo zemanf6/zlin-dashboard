@@ -1,156 +1,65 @@
-import {
-    ArrowLeft,
-    ArrowRight,
-    BadgeCheck,
-    BriefcaseBusiness,
-    Building2,
-    CarFront,
-    FileText,
-    Info,
-    Landmark,
-    Tractor,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import "../styles/appointments.css";
+import { useState } from "react";
+import { ArrowLeft, Grid2X2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { AppointmentCard } from "../components/appointments/AppointmentCard";
+import {
+  appointmentCategories,
+  appointmentOptions,
+  type AppointmentCategoryId,
+} from "../data/appointmentData";
+import "../styles/appointments.css";
 
-type AppointmentOption = {
-    title: string;
-    workplace: string;
-    href: string;
-    icon: LucideIcon;
-};
-
-const appointmentOptions: AppointmentOption[] = [
-    {
-        title: "Vyřízení OP / cestovního dokladu",
-        workplace: "pracoviště L. Váchy 602",
-        icon: BadgeCheck,
-        href: "https://v4.kadlecelektro.cz/obj/?id=1180&cinnostId=4863"
-    },
-    {
-        title: "Vyzvednutí OP / cestovního dokladu",
-        workplace: "pracoviště L. Váchy 602",
-        icon: BadgeCheck,
-        href: "https://v4.kadlecelektro.cz/obj/?id=1180&cinnostId=4864"
-    },
-    {
-        title: "Živnostenské podnikání",
-        workplace: "pracoviště Zarámí 4421",
-        icon: BriefcaseBusiness,
-        href: "https://v4.kadlecelektro.cz/obj/?id=1180&cinnostId=4894"
-    },
-    {
-        title: "Žádost o výpis z živnostenského rejstříku",
-        workplace: "pracoviště Zarámí 4421",
-        icon: FileText,
-        href: "https://v4.kadlecelektro.cz/obj/?id=1180&cinnostId=4895"
-    },
-    {
-        title: "Zemědělské podnikání",
-        workplace: "pracoviště Zarámí 4421",
-        icon: Tractor,
-        href: "https://v4.kadlecelektro.cz/obj/?id=1180&cinnostId=4896"
-    },
-    {
-        title: "Czech POINT",
-        workplace: "pracoviště nám. Míru 12 – vchod z Bartošovy ulice",
-        icon: Landmark,
-        href: "https://v4.kadlecelektro.cz/obj/?id=1180&cinnostId=4874"
-    },
-    {
-        title: "Řidičské průkazy",
-        workplace: "pracoviště L. Váchy 602",
-        icon: CarFront,
-        href: "https://v4.kadlecelektro.cz/obj/?id=1180&cinnostId=4869"
-    },
-    {
-        title: "Registrace vozidel / Změny v registru vozidel",
-        workplace: "pracoviště L. Váchy 602",
-        icon: CarFront,
-        href: "https://v4.kadlecelektro.cz/obj/?id=1180&cinnostId=4883"
-    },
-    {
-        title: "Registrace sportovního a historického vozidla",
-        workplace: "pracoviště L. Váchy 602",
-        icon: CarFront,
-        href: "https://v4.kadlecelektro.cz/obj/?id=1180&cinnostId=4885"
-    },
-    {
-        title: "Registrace vozidel bez českého TP / Přestavby / Výroba vozidel",
-        workplace: "pracoviště L. Váchy 602",
-        icon: CarFront,
-        href: "https://v4.kadlecelektro.cz/obj/?id=1180&cinnostId=4884"
-    },
-    {
-        title: "Taxislužba",
-        workplace: "pracoviště Zarámí 4421",
-        icon: Building2,
-        href: "https://v4.kadlecelektro.cz/obj/?id=1180&cinnostId=4897"
-    },
-];
+type CategoryFilter = "all" | AppointmentCategoryId;
 
 export function AppointmentPage() {
-    const navigate = useNavigate();
-    return (
-        <main className="appointment-page">
-            <section className="appointment-page__inner">
-                <button
-                    className="appointment-page__back-button"
-                    type="button"
-                    onClick={() => navigate("/")}
-                >
-                    <ArrowLeft size={18} strokeWidth={2} />
-                    <span>Zpět na nástěnku</span>
-                </button>
+  const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
+  const visibleOptions = activeCategory === "all"
+    ? appointmentOptions
+    : appointmentOptions.filter((option) => option.category === activeCategory);
+  const activeCategoryData = appointmentCategories.find((category) => category.id === activeCategory);
 
-                <div className="appointment-page__header">
-                    <div>
-                        <p className="appointment-page__eyebrow">Rezervace termínu</p>
-                        <h1>Vyberte službu, na kterou se chcete objednat</h1>
-                        <p className="appointment-page__lead">
-                            Zvolte konkrétní agendu. V dalším kroku bude následovat výběr
-                            dostupného termínu a potvrzení rezervace.
-                        </p>
-                    </div>
-                </div>
+  return (
+    <main className="appointment-page">
+      <div className="appointment-page__inner">
+        <button className="appointment-page__back-button" type="button" onClick={() => navigate("/")}>
+          <ArrowLeft size={18} /> Zpět na nástěnku
+        </button>
 
-                <aside className="appointment-note" aria-label="Poznámka k objednání">
-                    <div className="appointment-note__icon" aria-hidden="true">
-                        <Info size={22} strokeWidth={2} />
-                    </div>
-                    <p>
-                        Elektronické objednání není podmínkou, ale výhodou pro přednostní
-                        odbavení. Většina klientů je odbavována bez předchozího objednání.
-                    </p>
-                </aside>
+        <header className="appointment-page__header">
+          <p>Rezervace termínu</p>
+          <h1>Co potřebujete vyřídit?</h1>
+          <span>Nejprve vyberte oblast a potom konkrétní službu. Následně přejdete k výběru volného termínu.</span>
+        </header>
 
-                <div className="appointment-grid">
-                    {appointmentOptions.map((option) => {
-                        const Icon = option.icon;
+        <section className="appointment-categories" aria-labelledby="appointment-category-title">
+          <div className="appointment-section-heading">
+            <span>1</span>
+            <div><p>První krok</p><h2 id="appointment-category-title">Vyberte oblast</h2></div>
+          </div>
+          <div className="appointment-category-grid" role="group" aria-label="Kategorie služeb">
+            <button className={activeCategory === "all" ? "is-active" : ""} type="button" aria-pressed={activeCategory === "all"} onClick={() => setActiveCategory("all")}>
+              <span><Grid2X2 size={23} /></span><strong>Všechny služby</strong><small>{appointmentOptions.length} možností</small>
+            </button>
+            {appointmentCategories.map((category) => {
+              const Icon = category.icon;
+              const count = appointmentOptions.filter((option) => option.category === category.id).length;
+              return <button className={activeCategory === category.id ? "is-active" : ""} type="button" aria-pressed={activeCategory === category.id} onClick={() => setActiveCategory(category.id)} key={category.id}><span><Icon size={23} /></span><strong>{category.title}</strong><small>{category.description}</small><b>{count}</b></button>;
+            })}
+          </div>
+        </section>
 
-                        return (
-                            <a className="appointment-card" href={option.href} key={option.title} target="_blank">
-                                <div className="appointment-card__icon" aria-hidden="true">
-                                    <Icon size={26} strokeWidth={1.8} />
-                                </div>
-
-                                <div className="appointment-card__content">
-                                    <h2>{option.title}</h2>
-                                    <p>{option.workplace}</p>
-                                </div>
-
-                                <ArrowRight
-                                    className="appointment-card__arrow"
-                                    size={19}
-                                    strokeWidth={2}
-                                    aria-hidden="true"
-                                />
-                            </a>
-                        );
-                    })}
-                </div>
-            </section>
-        </main>
-    );
+        <section className="appointment-services" aria-labelledby="appointment-services-title">
+          <div className="appointment-section-heading">
+            <span>2</span>
+            <div><p>Druhý krok</p><h2 id="appointment-services-title">{activeCategoryData?.title ?? "Vyberte konkrétní službu"}</h2></div>
+            <small>{visibleOptions.length} {visibleOptions.length === 1 ? "služba" : visibleOptions.length < 5 ? "služby" : "služeb"}</small>
+          </div>
+          <div className="appointment-grid">
+            {visibleOptions.map((option) => <AppointmentCard option={option} key={option.href} />)}
+          </div>
+        </section>
+      </div>
+    </main>
+  );
 }

@@ -24,6 +24,10 @@ export function DashboardPage() {
       return () => navigate("/poplatek-za-odpad");
     }
 
+    if (serviceId === "dog-fee") {
+      return () => navigate("/poplatek-za-psa");
+    }
+
     return undefined;
   };
 

@@ -1,16 +1,29 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
-  ArrowLeft,
   CalendarDays,
-  CreditCard,
+  CheckCircle2,
+  ChevronRight,
+  Clock3,
+  Eye,
   FileCheck2,
   FileUp,
   Info,
-  QrCode,
   ReceiptText,
+  Send,
   UserRound,
+  X,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import {
+  FeeBackButton,
+  FeeCard,
+  FeeHero,
+  FeeHistory,
+  FeeLayout,
+  FeePageShell,
+  FeePaymentPanel,
+} from "../components/fees/FeeComponents";
+import { createPaymentDetails } from "../components/fees/feePayment";
 import "../styles/wasteFee.css";
 
 type FeeVariant = "full" | "relief400" | "relief300" | "exemption";
@@ -84,47 +97,41 @@ const feeOptions: Record<FeeVariant, FeeOption> = {
 
 const paymentHistory = [
   {
-    year: 2025,
+    id: "2026-jan",
+    year: 2026,
+    subject: "Jan Novák",
     amount: 900,
-    paidAt: "12. 5. 2025",
+    paidAt: "Uhrazeno 10. 5. 2026",
     status: "Zaplaceno",
   },
   {
-    year: 2024,
+    id: "2026-eliska",
+    year: 2026,
+    subject: "Eliška Nováková",
+    amount: 500,
+    paidAt: "Uhrazeno 10. 5. 2026 · schválená úleva 400 Kč",
+    status: "Zaplaceno",
+  },
+  {
+    id: "2025-jan",
+    year: 2025,
+    subject: "Jan Novák",
     amount: 900,
-    paidAt: "9. 5. 2024",
+    paidAt: "Uhrazeno 12. 5. 2025",
+    status: "Zaplaceno",
+  },
+  {
+    id: "2024-jan",
+    year: 2024,
+    subject: "Jan Novák",
+    amount: 900,
+    paidAt: "Uhrazeno 9. 5. 2024",
     status: "Zaplaceno",
   },
 ];
 
 function sanitizeBirthNumber(value: string) {
   return value.replace(/\D/g, "");
-}
-
-type WasteFeeHeroProps = {
-  selectedFee: FeeOption;
-};
-
-function WasteFeeHero({ selectedFee }: WasteFeeHeroProps) {
-  return (
-    <section className="waste-fee-hero" aria-labelledby="waste-fee-title">
-      <div>
-        <p className="waste-fee-hero__eyebrow">Městský poplatek</p>
-        <h1 id="waste-fee-title">Poplatek za komunální odpad</h1>
-        <p className="waste-fee-hero__text">
-          Základní sazba poplatku pro rok 2026 činí 900 Kč za rok. Zde si můžete
-          zobrazit platební údaje, zohlednit úlevu nebo osvobození a zkontrolovat
-          historii plateb.
-        </p>
-      </div>
-
-      <aside className="waste-fee-summary-card" aria-label="Souhrn poplatku">
-        <span>Rok 2026</span>
-        <strong>{selectedFee.amount.toLocaleString("cs-CZ")} Kč</strong>
-        <p>{selectedFee.label}</p>
-      </aside>
-    </section>
-  );
 }
 
 type PayerCardProps = {
@@ -141,16 +148,7 @@ function PayerCard({
   onBirthNumberChange,
 }: PayerCardProps) {
   return (
-    <section className="waste-card">
-      <div className="waste-card__header">
-        <div className="waste-card__icon" aria-hidden="true">
-          <UserRound size={24} strokeWidth={1.9} />
-        </div>
-        <div>
-          <p className="waste-card__eyebrow">Poplatník</p>
-          <h2>Za koho platíte?</h2>
-        </div>
-      </div>
+    <FeeCard icon={UserRound} eyebrow="Poplatník" title="Za koho platíte?">
 
       <div className="payer-toggle" role="group" aria-label="Výběr poplatníka">
         <button
@@ -158,6 +156,7 @@ function PayerCard({
             payerMode === "self" ? "payer-toggle__button--active" : ""
           }`}
           type="button"
+          aria-pressed={payerMode === "self"}
           onClick={() => onPayerModeChange("self")}
         >
           Platím za sebe
@@ -167,6 +166,7 @@ function PayerCard({
             payerMode === "other" ? "payer-toggle__button--active" : ""
           }`}
           type="button"
+          aria-pressed={payerMode === "other"}
           onClick={() => onPayerModeChange("other")}
         >
           Platím za jinou osobu
@@ -197,7 +197,7 @@ function PayerCard({
           </p>
         </div>
       )}
-    </section>
+    </FeeCard>
   );
 }
 
@@ -206,6 +206,7 @@ type FeeCalculationCardProps = {
   expandedDetail: FeeVariant | null;
   onFeeVariantChange: (variant: FeeVariant) => void;
   onExpandedDetailChange: (variant: FeeVariant | null) => void;
+  onOpenSubmissions: () => void;
 };
 
 function FeeCalculationCard({
@@ -213,39 +214,58 @@ function FeeCalculationCard({
   expandedDetail,
   onFeeVariantChange,
   onExpandedDetailChange,
+  onOpenSubmissions,
 }: FeeCalculationCardProps) {
   const shouldShowAttachment = feeVariant !== "full";
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [attachment, setAttachment] = useState<{ name: string; size: string } | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    setAttachment({
+      name: file.name,
+      size: Math.max(file.size / 1024 / 1024, 0.1).toLocaleString("cs-CZ", {
+        maximumFractionDigits: 1,
+      }) + " MB",
+    });
+    setIsSubmitted(false);
+  };
+
+  const removeAttachment = () => {
+    setAttachment(null);
+    setIsSubmitted(false);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
   return (
-    <section className="waste-card">
-      <div className="waste-card__header">
-        <div className="waste-card__icon" aria-hidden="true">
-          <ReceiptText size={24} strokeWidth={1.9} />
-        </div>
-        <div>
-          <p className="waste-card__eyebrow">Výpočet</p>
-          <h2>Sazba, úleva nebo osvobození</h2>
-        </div>
-      </div>
+    <FeeCard icon={ReceiptText} eyebrow="Výpočet" title="Sazba, úleva nebo osvobození">
 
       <div className="fee-options">
         {(Object.entries(feeOptions) as [FeeVariant, FeeOption][]).map(
           ([key, option]) => {
             const isActive = feeVariant === key;
             const isExpanded = expandedDetail === key;
+            const isApproved = key === "relief400";
 
             return (
               <article
-                className={`fee-option ${isActive ? "fee-option--active" : ""}`}
+                className={`fee-option ${isActive ? "fee-option--active" : ""} ${isApproved ? "fee-option--approved" : ""}`}
                 key={key}
               >
                 <button
                   className="fee-option__select"
                   type="button"
+                  aria-pressed={isActive}
                   onClick={() => onFeeVariantChange(key)}
                 >
                   <span>
-                    <strong>{option.label}</strong>
+                    <span className="fee-option__title">
+                      <strong>{option.label}</strong>
+                      {isApproved && <em><CheckCircle2 size={14} /> Schválená úleva</em>}
+                    </span>
                     <small>{option.description}</small>
                   </span>
                   <b>{option.amount.toLocaleString("cs-CZ")} Kč</b>
@@ -278,49 +298,93 @@ function FeeCalculationCard({
       </div>
 
       {shouldShowAttachment && (
-        <div className="attachment-panel">
+        <div className={"attachment-panel" + (isSubmitted ? " attachment-panel--submitted" : "")}>
           <div className="attachment-panel__header">
-            <FileCheck2 size={22} strokeWidth={2} />
+            {isSubmitted ? <CheckCircle2 size={22} strokeWidth={2} /> : <FileCheck2 size={22} strokeWidth={2} />}
             <div>
-              <strong>Příloha</strong>
-              <span>
-                Pro uplatnění úlevy nebo osvobození může být potřeba doložit rozhodný
-                údaj.
-              </span>
+              <strong>{isSubmitted ? "Doklad byl odeslán" : "Doložení nároku"}</strong>
+              <span>{isSubmitted ? "Žádost jsme přijali a předali ji ke kontrole." : "Přiložte doklad ve formátu PDF, který potvrzuje váš nárok."}</span>
             </div>
           </div>
 
-          <button className="attachment-panel__button" type="button">
-            <FileUp size={18} strokeWidth={2} />
-            <span>Přiložit doklad</span>
-          </button>
+          {!attachment ? (
+            <>
+              <input ref={fileInputRef} className="attachment-panel__input" type="file" accept="application/pdf,.pdf" onChange={handleFileChange} />
+              <button className="attachment-panel__button" type="button" onClick={() => fileInputRef.current?.click()}>
+                <FileUp size={18} strokeWidth={2} /><span>Přiložit doklad</span>
+              </button>
+              <small className="attachment-panel__hint">PDF, maximálně 10 MB</small>
+            </>
+          ) : (
+            <div className="attachment-file">
+              <div className="attachment-file__icon">PDF</div>
+              <div className="attachment-file__info"><strong>{attachment.name}</strong><span>{attachment.size}</span></div>
+              <button type="button" onClick={() => setIsPreviewOpen(true)}><Eye size={18} /><span>Zobrazit</span></button>
+              {!isSubmitted && <button className="attachment-file__remove" type="button" onClick={removeAttachment} aria-label="Odebrat doklad"><X size={19} /></button>}
+            </div>
+          )}
+
+          {attachment && !isSubmitted && (
+            <div className="attachment-panel__actions">
+              <p>Doklad je připravený k odeslání.</p>
+              <button type="button" onClick={() => setIsSubmitted(true)}><Send size={17} />Odeslat k posouzení</button>
+            </div>
+          )}
+
+          {attachment && isSubmitted && (
+            <>
+              <div className="attachment-status"><Clock3 size={18} /><div><strong>Čeká na posouzení</strong><span>O výsledku vás budeme informovat v portálu.</span></div></div>
+              <button className="attachment-panel__another" type="button" onClick={removeAttachment}>
+                <FileUp size={17} />
+                Doložit další doklad
+              </button>
+            </>
+          )}
         </div>
       )}
 
-      <div className="waste-note">
-        <Info size={20} strokeWidth={2} />
-        <p>
-          Úlevy a osvobození se vztahují pouze na poplatníky, kterým poplatková
-          povinnost vznikla z důvodu přihlášení ve městě. Pokud není rozhodný
-          údaj ohlášen ve stanovené lhůtě, nárok může zaniknout.
-        </p>
-      </div>
-    </section>
+      {shouldShowAttachment && (
+        <button className="submission-summary" type="button" onClick={onOpenSubmissions}>
+          <span className="submission-summary__icon"><Clock3 size={21} /></span>
+          <span className="submission-summary__copy">
+            <strong>1 žádost čeká na posouzení</strong>
+            <small>Další žádost o snížení sazby byla schválena</small>
+          </span>
+          <span className="submission-summary__action">Moje podání <ChevronRight size={18} /></span>
+        </button>
+      )}
+
+      {shouldShowAttachment && (
+        <div className="reduced-payment-note">
+          <Info size={20} />
+          <div>
+            <strong>Sníženou sazbu můžete zaplatit už nyní</strong>
+            <p>Na schválení žádosti nemusíte čekat. Pokud úřad nárok neschválí, v portálu se zobrazí částka zbývající k doplacení.</p>
+          </div>
+        </div>
+      )}
+
+      {isPreviewOpen && attachment && (
+        <div className="document-preview" role="dialog" aria-modal="true" aria-label="Náhled dokladu">
+          <button className="document-preview__backdrop" type="button" onClick={() => setIsPreviewOpen(false)} aria-label="Zavřít náhled" />
+          <div className="document-preview__dialog">
+            <div className="document-preview__header">
+              <div><strong>{attachment.name}</strong><span>Náhled přiloženého dokumentu</span></div>
+              <button type="button" onClick={() => setIsPreviewOpen(false)} aria-label="Zavřít"><X size={22} /></button>
+            </div>
+            <div className="document-preview__canvas">
+              <div className="document-preview__paper"><span>PDF</span><i /><i /><i /><i /><small>Ukázkový náhled dokumentu</small></div>
+            </div>
+          </div>
+        </div>
+      )}
+    </FeeCard>
   );
 }
 
 function DeadlineCard() {
   return (
-    <section className="waste-card">
-      <div className="waste-card__header">
-        <div className="waste-card__icon" aria-hidden="true">
-          <CalendarDays size={24} strokeWidth={1.9} />
-        </div>
-        <div>
-          <p className="waste-card__eyebrow">Splatnost</p>
-          <h2>Kdy se poplatek platí?</h2>
-        </div>
-      </div>
+    <FeeCard icon={CalendarDays} eyebrow="Splatnost" title="Kdy se poplatek platí?">
 
       <div className="deadline-grid">
         <article>
@@ -328,95 +392,11 @@ function DeadlineCard() {
           <span>do 15. 5. 2026</span>
         </article>
         <article>
-          <strong>Platba ve splátkách</strong>
-          <span>do 15. 5. 2026 a 15. 9. 2026</span>
-        </article>
-        <article>
           <strong>Vznik povinnosti po 15. 5.</strong>
           <span>do jednoho měsíce od vzniku povinnosti</span>
         </article>
       </div>
-    </section>
-  );
-}
-
-function PaymentHistoryCard() {
-  return (
-    <section className="waste-card">
-      <div className="waste-card__header">
-        <div className="waste-card__icon" aria-hidden="true">
-          <ReceiptText size={24} strokeWidth={1.9} />
-        </div>
-        <div>
-          <p className="waste-card__eyebrow">Historie</p>
-          <h2>Zaplacené poplatky</h2>
-        </div>
-      </div>
-
-      <div className="payment-history">
-        {paymentHistory.map((payment) => (
-          <article className="payment-history__item" key={payment.year}>
-            <div>
-              <strong>{payment.year}</strong>
-              <span>{payment.paidAt}</span>
-            </div>
-            <div>
-              <b>{payment.amount.toLocaleString("cs-CZ")} Kč</b>
-              <span>{payment.status}</span>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-type PaymentPanelProps = {
-  amount: number;
-  variableSymbol: string;
-};
-
-function PaymentPanel({ amount, variableSymbol }: PaymentPanelProps) {
-  return (
-    <aside className="payment-panel" aria-label="Platební údaje">
-      <div className="payment-panel__header">
-        <div className="payment-panel__icon" aria-hidden="true">
-          <CreditCard size={25} strokeWidth={1.9} />
-        </div>
-        <div>
-          <p>Platba</p>
-          <h2>Platební údaje</h2>
-        </div>
-      </div>
-
-      <div className="payment-panel__amount">
-        <span>Částka k úhradě</span>
-        <strong>{amount.toLocaleString("cs-CZ")} Kč</strong>
-      </div>
-
-      <dl className="payment-details">
-        <div>
-          <dt>Bankovní účet</dt>
-          <dd>000000-123456789 / 0800</dd>
-        </div>
-        <div>
-          <dt>Variabilní symbol</dt>
-          <dd>{variableSymbol || "Doplňte rodné číslo"}</dd>
-        </div>
-        <div>
-          <dt>Konstantní symbol</dt>
-          <dd>0379</dd>
-        </div>
-        <div>
-          <dt>Zpráva pro příjemce</dt>
-          <dd>Poplatek za odpad 2026</dd>
-        </div>
-      </dl>
-
-      <div className="qr-box" aria-label="QR kód pro platbu">
-        <QrCode size={118} strokeWidth={1.5} />
-      </div>
-    </aside>
+    </FeeCard>
   );
 }
 
@@ -438,21 +418,27 @@ export function WasteFeePage() {
   }, [birthNumber, payerMode]);
 
   return (
-    <main className="waste-fee-page">
-      <section className="waste-fee-page__inner">
-        <button
-          className="waste-fee-page__back-button"
-          type="button"
-          onClick={() => navigate("/")}
-        >
-          <ArrowLeft size={18} strokeWidth={2} />
-          <span>Zpět na nástěnku</span>
-        </button>
-
-        <WasteFeeHero selectedFee={selectedFee} />
-
-        <section className="waste-fee-layout">
-          <div className="waste-fee-main">
+    <FeePageShell>
+        <FeeBackButton onClick={() => navigate("/")} />
+        <FeeHero
+          title="Poplatek za komunální odpad"
+          description="Základní sazba pro rok 2026 činí 900 Kč. Zde můžete zohlednit úlevu nebo osvobození, zobrazit platební údaje a historii."
+          summaryLabel="Rok 2026"
+          summaryValue="1 400 Kč"
+          summaryMeta="Zaplaceno za 2 osoby"
+          summaryTone="success"
+        />
+        <FeeLayout payment={
+          <FeePaymentPanel
+            amount={selectedFee.amount}
+            amountLabel="Uhrazená částka"
+            status="Zaplaceno"
+            statusTone="success"
+            statusDescription="Platba za rok 2026 byla připsána."
+            deadline="Připsáno 10. 5. 2026"
+            details={createPaymentDetails({ variableSymbol: variableSymbol || "Doplňte rodné číslo", message: "Poplatek za odpad 2026" })}
+          />
+        }>
             <PayerCard
               payerMode={payerMode}
               birthNumber={birthNumber}
@@ -465,16 +451,13 @@ export function WasteFeePage() {
               expandedDetail={expandedDetail}
               onFeeVariantChange={setFeeVariant}
               onExpandedDetailChange={setExpandedDetail}
+              onOpenSubmissions={() => navigate("/moje-podani")}
             />
 
             <DeadlineCard />
 
-            <PaymentHistoryCard />
-          </div>
-
-          <PaymentPanel amount={selectedFee.amount} variableSymbol={variableSymbol} />
-        </section>
-      </section>
-    </main>
+            <FeeHistory items={paymentHistory} />
+        </FeeLayout>
+    </FeePageShell>
   );
 }

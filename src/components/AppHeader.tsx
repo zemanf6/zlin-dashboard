@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { CloudSun, ExternalLink, LogOut, UserRound } from "lucide-react";
+import { CloudSun, ExternalLink, Files, LogOut, UserRound } from "lucide-react";
 import "../styles/appHeader.css";
 
 const headerLinks = [
@@ -52,6 +52,14 @@ export function AppHeader() {
           <CloudSun size={21} strokeWidth={1.8} aria-hidden="true" />
           <span>26.4 °C | 18. 6. 2026</span>
         </div>
+
+        <Link className="app-header__submissions-link" to="/moje-podani">
+          <span className="app-header__submissions-icon" aria-hidden="true">
+            <Files size={20} strokeWidth={1.9} />
+            <b>1</b>
+          </span>
+          <span>Moje podání</span>
+        </Link>
 
         <Link className="app-header__profile-link" to="/profil">
           <span className="app-header__profile-icon" aria-hidden="true">
