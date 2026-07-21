@@ -1,7 +1,5 @@
 .fee-page { min-height: calc(100vh - 98px); padding: 42px 34px 68px; background: linear-gradient(180deg, #f7f9fb 0%, #eef3f7 100%); color: #2f3439; }
 .fee-page__inner { width: min(1280px, 100%); margin: 0 auto; }
-.fee-back { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; margin-bottom: 28px; padding: 0; border: 0; background: transparent; color: #00558c; cursor: pointer; font-weight: 800; }
-.fee-back:hover { color: #003f6a; }
 .fee-hero { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 34px; align-items: end; margin-bottom: 30px; }
 .fee-hero p, .fee-card__heading p { margin: 0 0 8px; color: #00558c; font-size: 13px; font-weight: 800; letter-spacing: .045em; text-transform: uppercase; }
 .fee-hero h1 { margin: 0; color: #30363a; font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -.035em; }
@@ -47,8 +45,8 @@
 .fee-history article > span:last-child { justify-items: end; }
 .fee-history small { color: #68737c; }
 .fee-history b { display: flex; align-items: center; gap: 5px; color: #18734a; font-size: 12px; }
-.fee-back:focus-visible,
 .fee-payment button:focus-visible { outline: 3px solid rgb(255 211 0 / 90%); outline-offset: 3px; }
 @media (max-width: 1100px) { .fee-hero, .fee-layout { grid-template-columns: 1fr; } .fee-payment { position: static; } }
 @media (max-width: 760px) { .fee-page { padding: 30px 20px 50px; } .fee-history article { flex-direction: column; } .fee-history article > span:last-child { justify-items: start; } }
-@media (max-width: 520px) { .fee-page { padding-inline: 14px; } .fee-hero h1 { font-size: 34px; } .fee-hero > div > span { font-size: 16px; } .fee-card, .fee-payment { padding: 18px; } .fee-card__heading { gap: 12px; } .fee-card__icon { width: 46px; height: 46px; } .fee-card__heading h2 { font-size: 20px; } .fee-card__badge { width: 100%; margin-left: 58px; } }
+@media (max-width: 520px) { .fee-page { padding-inline: 14px; } .fee-hero h1 { font-size: 34px; } .fee-hero > div > span { font-size: 16px; } .fee-card, .fee-payment { padding: 18px; } .fee-card__heading { flex-wrap: wrap; gap: 12px; } .fee-card__icon { width: 46px; height: 46px; } .fee-card__heading h2 { font-size: 20px; } .fee-card__badge { width: auto; margin-left: 58px; } .fee-payment__amount strong { font-size: 28px; } }
+@media (max-width: 380px) { .fee-card__badge { width: 100%; margin-left: 0; } }

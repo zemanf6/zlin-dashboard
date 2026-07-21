@@ -19,9 +19,35 @@ body {
   background: #f4f6f8;
 }
 
+html, body, #root { max-width: 100%; }
+body { overflow-x: clip; }
+img, svg { max-width: 100%; }
+p, li, dd, h1, h2, h3, strong, small, span { overflow-wrap: anywhere; }
+button, a, input, textarea, select { min-width: 0; }
+
+@media (max-width: 760px) {
+  button, a { -webkit-tap-highlight-color: transparent; }
+}
+
 button,
 input,
 textarea,
 select {
   font: inherit;
 }
+
+.page-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  margin-bottom: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #00558c;
+  cursor: pointer;
+  font-weight: 800;
+}
+.page-back-button:hover { color: #003f6a; }
+.page-back-button:focus-visible { outline: 3px solid rgb(255 211 0 / 90%); outline-offset: 3px; }

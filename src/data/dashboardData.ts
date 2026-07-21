@@ -12,6 +12,7 @@ import {
   UserRound,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { addDays, formatCzechDate } from "../utils/date";
 
 export type StatusTone = "success" | "warning" | "neutral" | "info";
 
@@ -32,12 +33,8 @@ export type MainService = {
   id: string;
   title: string;
   description: string;
-  status?: string;
-  statusTone?: StatusTone;
-  meta?: string;
   actionLabel: string;
   icon: LucideIcon;
-  featured?: boolean;
   href?: string;
 };
 
@@ -48,10 +45,12 @@ export type StateService = {
   icon: LucideIcon;
 };
 
+const formattedReservationDate = formatCzechDate(addDays(new Date(), 7));
+
 export const dashboardStatuses: DashboardStatus[] = [
   {
     label: "Nejbližší rezervace",
-    value: "24. 6. 2026 v 10:30",
+    value: `${formattedReservationDate} v 10:30`,
     tone: "info",
   },
 ];
@@ -59,7 +58,7 @@ export const dashboardStatuses: DashboardStatus[] = [
 export const currentReservation: CurrentReservation | null = {
   department: "pracoviště L. Váchy 602",
   agenda: "Vyřízení občanského průkazu",
-  date: "24. 6. 2026",
+  date: formattedReservationDate,
   time: "10:30",
 };
 
@@ -69,9 +68,6 @@ export const mainServices: MainService[] = [
     title: "Poplatek za odpad",
     description:
       "Zobrazte informace k poplatku za komunální odpad, historii plateb a možnosti úhrady.",
-    status: "Zaplaceno za rok 2026",
-    statusTone: "success",
-    meta: "Přehled plateb a potvrzení za předchozí období",
     actionLabel: "Zobrazit poplatek",
     icon: Trash2
   },
@@ -79,29 +75,20 @@ export const mainServices: MainService[] = [
     id: "dog-fee",
     title: "Poplatek za psa",
     description: "Kontrola evidovaného psa, výše poplatku a možnost online platby.",
-    status: "Čeká na úhradu",
-    statusTone: "warning",
-    meta: "Rex · splatnost 30. 4. 2026",
     actionLabel: "Zobrazit poplatek",
     icon: Dog,
   },
   {
     id: "appointment-booking",
-    title: "Rezervace termínu",
-    description: "Vyberte agendu a rezervujte si návštěvu úřadu na konkrétní čas.",
-    status: "Online",
-    statusTone: "info",
-    meta: "Doprava, doklady, poplatky a další agendy",
-    actionLabel: "Rezervovat termín",
+    title: "Samostatná rezervace termínu",
+    description: "Pro případ, že už přesně znáte agendu a pracoviště, které potřebujete navštívit.",
+    actionLabel: "Vybrat termín",
     icon: CalendarClock,
   },
   {
     id: "parking-permit",
     title: "Parkovací oprávnění",
     description: "Přidání vozidla a žádost o parkovací oprávnění podle adresy.",
-    status: "Plně online",
-    statusTone: "info",
-    meta: "Žádné oprávnění zatím nebylo registrováno",
     actionLabel: "Přidat oprávnění",
     icon: CarFront,
   },
@@ -109,9 +96,6 @@ export const mainServices: MainService[] = [
     id: "council-speaking",
     title: "Vystoupení na zastupitelstvu",
     description: "Přihlaste se k vystoupení na jednání zastupitelstva města.",
-    status: "Nejbližší jednání",
-    statusTone: "info",
-    meta: "17. 9. 2026 · zasedací místnost radnice",
     actionLabel: "Přihlásit se",
     icon: Landmark,
     href: "https://formulare.zlin.eu/aforms.php?action=fill&id_form=20309&id_fldr=2"
@@ -121,9 +105,6 @@ export const mainServices: MainService[] = [
     title: "Nahlásit problém ve městě",
     description:
       "Nahlaste rozbitý chodník, nepořádek, nesvítící lampu nebo jiný problém.",
-    status: "Nové hlášení",
-    statusTone: "info",
-    meta: "Stačí popis, místo a případně fotografie",
     actionLabel: "Nahlásit problém",
     icon: MapPinned,
   },

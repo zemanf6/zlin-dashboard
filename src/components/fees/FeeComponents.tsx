@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
-import { ArrowLeft, CheckCircle2, Clock3, CreditCard, QrCode, ReceiptText } from "lucide-react";
+import { CheckCircle2, Clock3, CreditCard, QrCode, ReceiptText } from "lucide-react";
+import { BackButton } from "../common/BackButton";
 import "../../styles/feeShared.css";
 
 export type PaymentDetail = { label: string; value: string };
@@ -11,7 +12,7 @@ export function FeePageShell({ children }: { children: ReactNode }) {
 }
 
 export function FeeBackButton({ onClick }: { onClick: () => void }) {
-  return <button className="fee-back" type="button" onClick={onClick}><ArrowLeft size={18} /> Zpět na nástěnku</button>;
+  return <BackButton label="Zpět na nástěnku" onClick={onClick} />;
 }
 
 type FeeHeroProps = {

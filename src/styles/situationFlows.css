@@ -1,0 +1,198 @@
+.situation-page { min-height: calc(100vh - 98px); padding: 38px 28px 70px; background: #f2f6f8; color: #2f3439; }
+.situation-page__inner { width: min(1160px, 100%); margin: 0 auto; }
+.situation-back { margin-bottom: 22px; }
+.situation-hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: center; padding: 32px 35px; background: #00558c; color: #fff; }
+.situation-hero--dog { background: #145d4a; }
+.situation-hero p { margin: 0 0 7px; color: #ffd300; font-size: 11px; font-weight: 900; letter-spacing: .055em; text-transform: uppercase; }
+.situation-hero h1 { margin: 0; font-size: clamp(31px, 4.5vw, 47px); line-height: 1.08; letter-spacing: -.035em; }
+.situation-hero > div > span { display: block; max-width: 760px; margin-top: 13px; color: #d8eaf4; font-size: 16px; line-height: 1.5; }
+.situation-hero aside { display: grid; min-width: 190px; padding: 18px 20px; background: rgb(255 255 255 / 12%); }
+.situation-hero aside small { color: #d8eaf4; }
+.situation-hero aside strong { margin: 3px 0; color: #ffd300; font-size: 28px; }
+.situation-hero aside span { font-size: 11px; }
+.situation-facts { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #d6e2e8; border-top: 0; background: #fff; }
+.situation-facts > span { display: flex; gap: 8px; align-items: center; padding: 14px 18px; border-right: 1px solid #e0e8ec; color: #00558c; font-size: 12px; }
+.situation-facts > span:last-child { border: 0; }
+.situation-explainer { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: start; margin: 20px 0; padding: 16px 18px; border-left: 4px solid #e3ad00; background: #fff9dd; color: #695500; }
+.situation-explainer p { margin: 3px 0 0; font-size: 13px; line-height: 1.5; }
+.situation-explainer details { text-align: right; }
+.situation-explainer summary { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; color: #00558c; font-size: 12px; font-weight: 800; list-style: none; }
+.situation-explainer details p { max-width: 420px; margin-top: 12px; text-align: left; }
+.situation-layout { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 20px; align-items: start; margin-top: 20px; }
+.situation-form { display: grid; gap: 15px; }
+.form-required-note { margin: 0; padding: 10px 12px; border-left: 3px solid #00558c; background: #eef6fb; color: #52636d; font-size: 12px; }
+.form-required-note span { color: #a33a3a; font-weight: 900; }
+.situation-step { padding: 23px; border: 1px solid #d7e2e8; background: #fff; }
+.situation-step > header { display: flex; gap: 11px; align-items: center; margin-bottom: 18px; }
+.situation-step > header > b { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #00558c; color: #fff; }
+.situation-step header p { margin: 0 0 2px; color: #00558c; font-size: 10px; font-weight: 900; text-transform: uppercase; }
+.situation-step h2 { margin: 0; font-size: 20px; }
+.situation-field { display: grid; gap: 6px; color: #48565e; font-size: 11px; font-weight: 800; }
+.situation-field > div { display: flex; gap: 8px; align-items: center; min-height: 47px; padding: 0 12px; border: 1px solid #b8cbd6; color: #00558c; }
+.situation-field input { width: 100%; min-width: 0; border: 0; outline: 0; color: #30383d; }
+.situation-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
+.situation-verified, .dog-registration-address { display: flex; gap: 10px; align-items: center; margin-top: 11px; padding: 11px 12px; background: #edf8f3; color: #18734a; }
+.situation-verified span, .dog-registration-address span { display: grid; gap: 2px; }
+.situation-verified small, .dog-registration-address small { color: #567065; }
+.situation-choice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.situation-choice-grid button { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; min-height: 50px; padding: 10px; border: 1px solid #cddae1; background: #fff; color: #3e4c54; cursor: pointer; text-align: left; }
+.situation-choice-grid button.is-active, .situation-slots button.is-active, .dog-registration-home button.is-active, .dog-registration-rates button.is-active { border-color: #00558c; background: #eef6fb; color: #00558c; box-shadow: inset 0 -3px 0 #00558c; }
+.situation-upload { display: flex; gap: 10px; align-items: center; width: 100%; margin-top: 12px; padding: 13px; border: 1px dashed #79a9c3; background: #f5fafc; color: #00558c; cursor: pointer; text-align: left; }
+.situation-upload span, .situation-file span { display: grid; gap: 2px; }
+.situation-upload small, .situation-file small { color: #68767e; }
+.situation-file { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; margin-top: 12px; padding: 12px; border: 1px solid #a8d2bd; background: #eff9f4; color: #18734a; }
+.situation-file button { padding: 6px; border: 0; background: transparent; cursor: pointer; }
+.situation-office { display: flex; gap: 10px; padding: 13px; background: #f2f6f8; color: #00558c; }
+.situation-office > div { display: grid; gap: 3px; }
+.situation-office span, .situation-office small { color: #5f6e76; }
+.situation-slots { display: grid; gap: 7px; margin-top: 11px; }
+.situation-slots button { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; padding: 11px 12px; border: 1px solid #ccd9e0; background: #fff; cursor: pointer; text-align: left; }
+.situation-submit { display: flex; justify-content: center; gap: 8px; align-items: center; min-height: 50px; border: 1px solid #00558c; background: #00558c; color: #fff; cursor: pointer; font-weight: 900; }
+.situation-submit:disabled { border-color: #ccd5da; background: #dce3e7; color: #7c888f; cursor: not-allowed; }
+.situation-payment { position: sticky; top: 118px; padding: 21px; border: 1px solid #d5e1e7; border-top: 5px solid #ffd300; background: #fff; box-shadow: 0 10px 28px rgb(18 53 75 / 7%); }
+.situation-payment > header { display: flex; gap: 10px; align-items: center; }
+.situation-payment > header > span { display: grid; place-items: center; width: 45px; height: 45px; background: #e9f3f8; color: #00558c; }
+.situation-payment header p { margin: 0; color: #68757c; font-size: 10px; font-weight: 900; text-transform: uppercase; }
+.situation-payment h2 { margin: 2px 0 0; font-size: 25px; }
+.situation-payment > p { color: #617078; font-size: 13px; line-height: 1.5; }
+.situation-payment__details { display: grid; gap: 1px; margin: 15px 0; background: #e1e8ec; }
+.situation-payment__details span { display: grid; gap: 3px; padding: 10px; background: #f7f9fa; color: #748087; font-size: 10px; }
+.situation-payment__details strong { color: #30383d; font-size: 12px; }
+.situation-payment > button { width: 100%; min-height: 42px; border: 1px solid #00558c; background: #00558c; color: #fff; cursor: pointer; font-weight: 800; }
+.situation-payment > button.situation-payment__later { margin-top: 7px; background: #fff; color: #00558c; }
+.situation-payment > small { display: block; margin-top: 12px; color: #738087; line-height: 1.4; }
+.situation-payment__paid { display: flex; gap: 9px; align-items: center; margin: 15px 0; padding: 12px; background: #eaf8f1; color: #18734a; }
+.situation-payment__paid span { display: grid; }
+.situation-payment__paid small { color: #5f7369; }
+.situation-success { display: grid; justify-items: center; max-width: 700px; padding: 45px 40px; border-top: 6px solid #219665; background: #fff; text-align: center; }
+.situation-success > span { display: grid; place-items: center; width: 76px; height: 76px; border-radius: 50%; background: #def4e9; color: #18734a; }
+.situation-success > p:first-of-type { margin: 16px 0 6px; color: #18734a; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+.situation-success h1 { margin: 0; font-size: clamp(26px, 4vw, 37px); }
+.situation-success__appointment { display: flex; gap: 10px; margin: 20px 0; padding: 14px 20px; background: #eef6fb; color: #00558c; text-align: left; }
+.situation-success__appointment span { display: grid; gap: 2px; }
+.situation-success__appointment b { color: #51636e; font-size: 12px; }
+.situation-success ul { display: grid; gap: 7px; padding: 0; list-style: none; text-align: left; }
+.situation-success li { display: flex; gap: 7px; color: #3e5e4d; }
+.situation-success > p:last-of-type { color: #647179; line-height: 1.5; }
+.situation-success > button { min-height: 44px; padding: 0 16px; border: 1px solid #00558c; background: #00558c; color: #fff; cursor: pointer; font-weight: 900; }
+.situation-success > button.situation-link-button { margin-top: 7px; border: 0; background: transparent; color: #00558c; }
+.dog-registration-home { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.dog-registration-home button { display: grid; grid-template-columns: auto 1fr auto; gap: 9px; align-items: center; padding: 13px; border: 1px solid #cbd8df; background: #fff; cursor: pointer; text-align: left; }
+.dog-registration-home span { display: grid; gap: 3px; }
+.dog-registration-home small { color: #6d7980; }
+.dog-registration-order { display: flex; gap: 8px; margin-top: 10px; padding: 10px; background: #fff8da; color: #735d00; font-size: 12px; }
+.dog-registration-rates { display: grid; gap: 7px; }
+.dog-registration-rates button { display: grid; gap: 3px; padding: 12px; border: 1px solid #ccd9df; background: #fff; cursor: pointer; text-align: left; }
+.dog-registration-rates small { color: #68767d; }
+.dog-rate-summary { padding: 22px; border: 2px solid #99bace; background: #f5fafc; }
+.dog-rate-summary > div { display: flex; justify-content: space-between; gap: 15px; align-items: center; }
+.dog-rate-summary > div small { color: #60717a; }
+.dog-rate-summary > div strong { color: #00558c; font-size: 28px; }
+.dog-rate-summary ul { display: flex; flex-wrap: wrap; gap: 7px; padding: 12px 0 0; border-top: 1px solid #d8e5eb; list-style: none; }
+.dog-rate-summary li { display: inline-flex; gap: 4px; align-items: center; padding: 5px 8px; background: #fff; color: #34566a; font-size: 11px; font-weight: 800; }
+.dog-rate-summary p { margin: 10px 0 0; color: #61717a; font-size: 12px; line-height: 1.5; }
+.situation-confirm { display: flex; gap: 9px; align-items: start; padding: 13px; background: #fff; color: #4e5b63; font-size: 12px; }
+.situation-confirm input { margin-top: 2px; accent-color: #00558c; }
+.situation-payment dl { display: grid; gap: 1px; margin: 16px 0; background: #dfe7eb; }
+.situation-payment dl div { display: flex; justify-content: space-between; gap: 10px; padding: 10px; background: #f8fafb; font-size: 12px; }
+.situation-payment dt { color: #718087; }
+.situation-payment dd { margin: 0; font-weight: 800; text-align: right; }
+.dog-registration-result { display: flex; gap: 11px; align-items: center; margin: 20px 0; padding: 15px 18px; background: #eff8f4; color: #18734a; text-align: left; }
+.dog-registration-result span { display: grid; }
+.dog-registration-result b { margin-left: 20px; }
+.dog-detailed-info { margin-top: 22px; padding: 24px; border: 1px solid #d7e2e8; background: #fff; }
+.dog-detailed-info > h2 { margin: 0; font-size: 23px; }
+.dog-detailed-info > p { margin: 6px 0 18px; color: #68767e; }
+.dog-detailed-info details { border-top: 1px solid #dfe7eb; }
+.dog-detailed-info summary { display: flex; justify-content: space-between; gap: 15px; align-items: center; padding: 15px 2px; color: #35434b; cursor: pointer; font-weight: 900; list-style: none; }
+.dog-detailed-info summary span { display: grid; place-items: center; width: 25px; height: 25px; background: #e9f3f8; color: #00558c; }
+.dog-detailed-info details[open] summary span { transform: rotate(45deg); }
+.dog-detailed-info details > div { padding: 0 2px 18px; color: #5e6d75; font-size: 13px; line-height: 1.55; }
+.dog-detailed-info h3 { margin: 14px 0 8px; color: #34434b; font-size: 14px; }
+.dog-detailed-info a { color: #00558c; font-weight: 800; }
+.dog-rate-table { display: grid; grid-template-columns: minmax(190px, 1fr) repeat(2, minmax(90px, .45fr)); border: 1px solid #d5e0e6; background: #d5e0e6; gap: 1px; }
+.dog-rate-table > * { margin: 0; padding: 9px 10px; background: #f8fafb; }
+.dog-rate-table > b { background: #eaf3f8; color: #00558c; font-size: 11px; }
+.situation-address-wrap { position: relative; }
+.situation-address-suggestions { position: absolute; z-index: 5; top: calc(100% + 3px); right: 0; left: 0; border: 1px solid #aebfca; background: #fff; box-shadow: 0 12px 28px rgb(20 43 58 / 16%); }
+.situation-address-suggestions button { display: flex; gap: 8px; align-items: center; width: 100%; padding: 11px 12px; border: 0; border-bottom: 1px solid #e4eaed; background: #fff; cursor: pointer; text-align: left; }
+.situation-address-suggestions button:hover { background: #eef7fb; color: #00558c; }
+.situation-address-note { display: flex; gap: 9px; align-items: start; margin-top: 10px; padding: 10px 12px; background: #edf7fc; color: #00558c; }
+.situation-address-note span { display: grid; gap: 2px; }
+.situation-address-note small { color: #61747f; line-height: 1.4; }
+.situation-person-id { margin-top: 12px; }
+.situation-person-id > small { color: #718087; font-weight: 500; }
+.situation-subheading { margin: 19px 0 9px; font-size: 15px; }
+.moving-people { display: grid; gap: 8px; }
+.moving-person { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; width: 100%; min-height: 62px; padding: 11px 13px; border: 1px solid #cbd8df; background: #fff; color: #34424a; cursor: pointer; text-align: left; }
+.moving-person.is-selected { border-color: #00558c; background: #eef6fb; }
+.moving-person__check { display: grid; place-items: center; width: 25px; height: 25px; border: 2px solid #8fa6b3; border-radius: 50%; }
+.moving-person.is-selected .moving-person__check { border-color: #00558c; background: #00558c; color: #fff; }
+.moving-person > span:nth-child(2) { display: grid; gap: 3px; }
+.moving-person small { color: #68767e; }
+.moving-person b { color: #00558c; font-size: 11px; }
+.moving-entrusted { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: end; padding: 12px; border: 1px solid #b8cfdb; background: #f7fafc; }
+.moving-entrusted > button { display: grid; place-items: center; width: 42px; height: 42px; border: 0; background: transparent; color: #9a3f3f; cursor: pointer; }
+.moving-entrusted.is-saved { border-color: #83b99e; background: #f1faf5; }
+.moving-person-fee { display: grid; gap: 8px; margin-top: 9px; }
+.moving-person-fee > span { display: flex; gap: 6px; align-items: center; color: #18734a; font-size: 12px; font-weight: 900; }
+.moving-person-fee > div { display: flex; flex-wrap: wrap; gap: 6px; }
+.moving-person-fee button { min-height: 33px; padding: 0 9px; border: 1px solid #b8c9c0; background: #fff; color: #52645a; cursor: pointer; font-size: 11px; font-weight: 800; }
+.moving-person-fee button.is-active { border-color: #18734a; background: #18734a; color: #fff; }
+.moving-save-person { min-height: 38px; margin-top: 9px; padding: 0 12px; border: 1px solid #00558c; background: #00558c; color: #fff; cursor: pointer; font-weight: 800; }
+.moving-save-person:disabled { border-color: #ccd5da; background: #dfe5e8; color: #829099; cursor: not-allowed; }
+.moving-add-person { margin-top: 9px; padding: 9px 0; border: 0; background: transparent; color: #00558c; cursor: pointer; font-weight: 900; }
+.appointment-calendar { margin-top: 13px; padding: 13px; border: 1px solid #d2dee4; }
+.appointment-calendar > header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.appointment-calendar > header button { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid #d2dce2; background: #fff; color: #00558c; cursor: pointer; }
+.appointment-calendar__week, .appointment-calendar__days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
+.appointment-calendar__week span { padding: 5px; color: #748087; font-size: 10px; font-weight: 800; }
+.appointment-calendar__days button { position: relative; min-height: 35px; border: 0; background: #f1f4f6; color: #9aa3a8; }
+.appointment-calendar__days button.is-available { background: #e9f4fa; color: #00558c; cursor: pointer; font-weight: 800; }
+.appointment-calendar__days button.is-selected { background: #00558c; color: #fff; }
+.appointment-calendar__days button small { position: absolute; right: 4px; bottom: 4px; width: 4px; height: 4px; border-radius: 50%; background: #20a16b; }
+.appointment-times { margin-top: 12px; }
+.appointment-times > span { color: #5e6c74; font-size: 11px; font-weight: 800; }
+.appointment-times > div { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+.appointment-times button { min-height: 34px; padding: 0 11px; border: 1px solid #b9ccd7; background: #fff; color: #00558c; cursor: pointer; font-weight: 800; }
+.appointment-times button.is-active { background: #00558c; color: #fff; }
+.appointment-without { display: flex; gap: 7px; align-items: center; margin-top: 12px; padding: 8px 0; border: 0; background: transparent; color: #00558c; cursor: pointer; font-weight: 800; }
+.situation-more { padding: 22px; border: 1px solid #d7e2e8; background: #fff; }
+.situation-more h2 { margin: 0 0 12px; font-size: 20px; }
+.situation-more details { border-top: 1px solid #e2e8eb; }
+.situation-more summary { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 13px 0; cursor: pointer; font-weight: 800; list-style: none; }
+.situation-more details p { margin: 0 0 14px; color: #617078; font-size: 13px; line-height: 1.55; }
+.payment-choice { display: grid; gap: 7px; margin-top: 14px; }
+.payment-choice button { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; padding: 11px; border: 1px solid #cbd7de; background: #fff; cursor: pointer; text-align: left; }
+.payment-choice button span { display: grid; gap: 2px; }
+.payment-choice button small { color: #6b787f; }
+.payment-choice button.is-active { border-color: #00558c; background: #eef6fb; color: #00558c; }
+.situation-qr { display: grid; justify-items: center; margin-top: 13px; padding: 14px; background: #f5f8fa; color: #00558c; }
+.situation-qr > span { margin: 5px 0 12px; font-size: 11px; font-weight: 800; }
+.situation-qr dl { width: 100%; margin: 0; }
+@media (max-width: 850px) { .situation-layout { grid-template-columns: 1fr; } .situation-payment { position: static; grid-row: 1; } }
+@media (max-width: 650px) { .situation-page { padding: 26px 14px 50px; } .situation-hero { grid-template-columns: 1fr; padding: 25px 22px; } .situation-facts { grid-template-columns: 1fr; } .situation-facts > span { border-right: 0; border-bottom: 1px solid #e0e8ec; } .situation-explainer { grid-template-columns: auto 1fr; } .situation-explainer details { grid-column: 2; text-align: left; } .situation-fields, .situation-choice-grid, .dog-registration-home { grid-template-columns: 1fr; } .situation-success { padding: 35px 20px; } }
+
+@media (max-width: 650px) {
+  .situation-step, .situation-more { padding: 18px; }
+  .situation-step > header { align-items: flex-start; }
+  .situation-file { grid-template-columns: auto minmax(0, 1fr); }
+  .situation-file > :last-child { grid-column: 2; justify-self: start; }
+  .moving-person { grid-template-columns: auto minmax(0, 1fr); }
+  .moving-person > b { grid-column: 2; justify-self: start; }
+  .moving-entrusted { grid-template-columns: 1fr; align-items: stretch; }
+  .moving-entrusted > button { justify-self: end; }
+  .payment-choice button { grid-template-columns: auto minmax(0, 1fr); }
+  .payment-choice button > svg:last-child { grid-column: 2; justify-self: end; }
+  .situation-qr dd { overflow-wrap: anywhere; }
+  .dog-detailed-info details > div { overflow-x: auto; }
+  .dog-rate-table { min-width: 520px; }
+}
+
+@media (max-width: 380px) {
+  .situation-page { padding-inline: 10px; }
+  .situation-hero, .situation-step, .situation-more { padding-inline: 16px; }
+  .appointment-calendar { padding: 9px; }
+  .appointment-calendar__week, .appointment-calendar__days { gap: 2px; }
+  .appointment-calendar__days button { min-height: 33px; padding: 0; }
+}

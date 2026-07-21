@@ -11,20 +11,23 @@ export function DogFeePage() {
   const navigate = useNavigate();
   const [homeType, setHomeType] = useState<HomeType>("apartment");
   const [showDiscountInfo, setShowDiscountInfo] = useState(false);
-  const amount = homeType === "apartment" ? 1000 : 500;
+  const baseAmount = homeType === "apartment" ? 1000 : 500;
+  const secondAmount = homeType === "apartment" ? 1500 : 750;
+  const amount = baseAmount + secondAmount;
 
   return (
     <FeePageShell>
       <FeeBackButton onClick={() => navigate("/")} />
-      <FeeHero title="Poplatek ze psů" description="Zkontrolujte evidovaného psa, jednoduše zvolte typ bydlení a zobrazte údaje k platbě." summaryLabel="K úhradě za rok 2026" summaryValue={`${amount.toLocaleString("cs-CZ")} Kč`} summaryMeta="Rex · čeká na úhradu" />
-      <FeeLayout payment={<FeePaymentPanel amount={amount} status="Čeká na úhradu" statusDescription="Platba za psa Rex pro rok 2026." deadline="Splatnost 30. 4. 2026" details={createPaymentDetails({ variableSymbol: "0201154470", message: "Poplatek za psa Rex 2026", subject: "Rex", subjectLabel: "Platba za psa" })} />}>
-        <FeeCard icon={Dog} eyebrow="Evidence" title="Váš pes" badge="1 pes">
+      <FeeHero title="Poplatek ze psů" description="Zkontrolujte evidované psy, zvolenou sazbu a údaje k platbě." summaryLabel="K úhradě za rok 2026" summaryValue={`${amount.toLocaleString("cs-CZ")} Kč`} summaryMeta="Rex a Bella · čeká na úhradu" />
+      <FeeLayout payment={<FeePaymentPanel amount={amount} status="Čeká na zaplacení" statusDescription="Platba za psy Rex a Bella pro rok 2026." deadline="Splatnost 30. 4. 2026" details={createPaymentDetails({ variableSymbol: "0201154470", message: "Poplatek ze psů 2026", subject: "Rex a Bella", subjectLabel: "Platba za psy" })} />}>
+        <FeeCard icon={Dog} eyebrow="Evidence" title="Vaši psi" badge="2 psi">
           <div className="dog-record">
             <div className="dog-record__identity"><span><Dog size={23} /></span><div><strong>Rex</strong><small>Labradorský retrívr · čip 203098100842100</small></div><b>Aktivní</b></div>
             <div className="dog-record__details"><div><span>Datum narození</span><strong>14. 3. 2021</strong></div><div><span>Pořadí psa</span><strong>První pes</strong></div><div><span>Držitel</span><strong>Jan Novák</strong></div></div>
             <div className="dog-record__actions"><button type="button"><Pencil size={16} /> Upravit údaje psa</button></div>
           </div>
-          <button className="dog-add-button" type="button"><Plus size={18} /> Přidat dalšího psa</button>
+          <div className="dog-record"><div className="dog-record__identity"><span><Dog size={23} /></span><div><strong>Bella</strong><small>Border kolie · přihlášena elektronicky 8. 7. 2026</small></div><b>Aktivní</b></div><div className="dog-record__details"><div><span>Pořadí psa</span><strong>Druhý pes</strong></div><div><span>Roční sazba</span><strong>{secondAmount.toLocaleString("cs-CZ")} Kč</strong></div><div><span>Držitel</span><strong>Jan Novák</strong></div></div><div className="dog-record__actions"><button type="button"><Pencil size={16} /> Upravit údaje psa</button></div></div>
+          <button className="dog-add-button" type="button" onClick={() => navigate("/zivotni-situace/poridil-jsem-si-psa", { state: { fromDogFee: true } })}><Plus size={18} /> Přidat dalšího psa</button>
         </FeeCard>
 
         <FeeCard icon={ReceiptText} eyebrow="Výpočet poplatku" title="Vyberte typ bydlení">
@@ -34,7 +37,7 @@ export function DogFeePage() {
             <button className={homeType === "house" ? "is-active" : ""} type="button" aria-pressed={homeType === "house"} onClick={() => setHomeType("house")}><span><Home size={25} /></span><span><strong>Rodinný dům</strong><small>Rodinný dům nebo jiný objekt</small></span><b>500 Kč</b></button>
           </div>
           <div className="dog-area-info"><span><ShieldCheck size={21} /></span><div><strong>Oblast jsme určili automaticky</strong><p>Podle vašeho trvalého bydliště spadáte do oblasti uvedené v příloze č. 1 vyhlášky. Nemusíte nic dohledávat ani vybírat.</p><small>Dlouhá 123, 760 01 Zlín</small></div></div>
-          <div className="dog-rate-result"><div><span>Roční sazba za psa Rex</span><strong>{homeType === "apartment" ? "První pes v bytovém domě" : "První pes v rodinném domě"}</strong></div><b>{amount.toLocaleString("cs-CZ")} Kč</b></div>
+          <div className="dog-rate-result"><div><span>Roční sazba za psa Rex</span><strong>{homeType === "apartment" ? "První pes v bytovém domě" : "První pes v rodinném domě"}</strong></div><b>{baseAmount.toLocaleString("cs-CZ")} Kč</b></div>
         </FeeCard>
 
         <section className="fee-card dog-info-grid">

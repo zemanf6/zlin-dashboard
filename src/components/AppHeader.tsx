@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { CloudSun, ExternalLink, Files, LogOut, UserRound } from "lucide-react";
+import { CloudSun, ExternalLink, Files, LogOut, Newspaper, UserRound } from "lucide-react";
 import "../styles/appHeader.css";
+import { NotificationCenter } from "./notifications/NotificationCenter";
+import { formatCzechDate } from "../utils/date";
 
 const headerLinks = [
   {
@@ -15,6 +17,7 @@ const headerLinks = [
 
 export function AppHeader() {
   const logoSrc = `${import.meta.env.BASE_URL}images/portal-obcana-logo.png`;
+  const currentDate = formatCzechDate(new Date());
 
   return (
     <header className="app-header">
@@ -50,8 +53,15 @@ export function AppHeader() {
       <nav className="app-header__actions" aria-label="Uživatelské menu">
         <div className="app-header__weather" aria-label="Počasí a datum">
           <CloudSun size={21} strokeWidth={1.8} aria-hidden="true" />
-          <span>26.4 °C | 18. 6. 2026</span>
+          <span>26.4 °C | {currentDate}</span>
         </div>
+
+        <NotificationCenter />
+
+        <Link className="app-header__board-link" to="/nastenka">
+          <Newspaper size={20} strokeWidth={1.9} />
+          <span>Nástěnka</span>
+        </Link>
 
         <Link className="app-header__submissions-link" to="/moje-podani">
           <span className="app-header__submissions-icon" aria-hidden="true">

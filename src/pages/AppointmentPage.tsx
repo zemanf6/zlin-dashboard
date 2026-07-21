@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { ArrowLeft, Grid2X2 } from "lucide-react";
+import { Grid2X2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { AppointmentCard } from "../components/appointments/AppointmentCard";
+import { BackButton } from "../components/common/BackButton";
 import {
   appointmentCategories,
   appointmentOptions,
@@ -22,9 +23,7 @@ export function AppointmentPage() {
   return (
     <main className="appointment-page">
       <div className="appointment-page__inner">
-        <button className="appointment-page__back-button" type="button" onClick={() => navigate("/")}>
-          <ArrowLeft size={18} /> Zpět na nástěnku
-        </button>
+        <BackButton label="Zpět na nástěnku" onClick={() => navigate("/")} />
 
         <header className="appointment-page__header">
           <p>Rezervace termínu</p>
