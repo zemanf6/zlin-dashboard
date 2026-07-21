@@ -15,7 +15,7 @@ const headerLinks = [
   },
 ];
 
-export function AppHeader() {
+export function AppHeader({ onLogout }: { onLogout: () => void }) {
   const logoSrc = `${import.meta.env.BASE_URL}images/portal-obcana-logo.png`;
   const currentDate = formatCzechDate(new Date());
 
@@ -81,7 +81,7 @@ export function AppHeader() {
           </span>
         </Link>
 
-        <button className="app-header__logout-button" type="button">
+        <button className="app-header__logout-button" type="button" onClick={onLogout}>
           <LogOut size={19} strokeWidth={1.9} aria-hidden="true" />
           <span>Odhlásit</span>
         </button>
