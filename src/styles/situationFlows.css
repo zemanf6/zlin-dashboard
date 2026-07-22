@@ -3,6 +3,7 @@
 .situation-back { margin-bottom: 22px; }
 .situation-hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: center; padding: 32px 35px; background: #00558c; color: #fff; }
 .situation-hero--dog { background: #145d4a; }
+.situation-hero--id { background: linear-gradient(120deg, #004f82, #0872a8); }
 .situation-hero p { margin: 0 0 7px; color: #ffd300; font-size: 11px; font-weight: 900; letter-spacing: .055em; text-transform: uppercase; }
 .situation-hero h1 { margin: 0; font-size: clamp(31px, 4.5vw, 47px); line-height: 1.08; letter-spacing: -.035em; }
 .situation-hero > div > span { display: block; max-width: 760px; margin-top: 13px; color: #d8eaf4; font-size: 16px; line-height: 1.5; }
@@ -124,6 +125,10 @@
 .situation-person-id > small { color: #718087; font-weight: 500; }
 .situation-subheading { margin: 19px 0 9px; font-size: 15px; }
 .moving-people { display: grid; gap: 8px; }
+.moving-scope-note { display: flex; gap: 9px; margin-bottom: 10px; padding: 11px 12px; background: #edf6fb; color: #00558c; }
+.moving-scope-note > svg { flex: 0 0 auto; margin-top: 1px; }
+.moving-scope-note > span { display: grid; gap: 3px; }
+.moving-scope-note small { color: #586d79; line-height: 1.4; }
 .moving-person { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; width: 100%; min-height: 62px; padding: 11px 13px; border: 1px solid #cbd8df; background: #fff; color: #34424a; cursor: pointer; text-align: left; }
 .moving-person.is-selected { border-color: #00558c; background: #eef6fb; }
 .moving-person__check { display: grid; place-items: center; width: 25px; height: 25px; border: 2px solid #8fa6b3; border-radius: 50%; }
@@ -142,6 +147,7 @@
 .moving-save-person { min-height: 38px; margin-top: 9px; padding: 0 12px; border: 1px solid #00558c; background: #00558c; color: #fff; cursor: pointer; font-weight: 800; }
 .moving-save-person:disabled { border-color: #ccd5da; background: #dfe5e8; color: #829099; cursor: not-allowed; }
 .moving-add-person { margin-top: 9px; padding: 9px 0; border: 0; background: transparent; color: #00558c; cursor: pointer; font-weight: 900; }
+.moving-no-person { margin: 0; padding: 9px 11px; border-left: 3px solid #e3ad00; background: #fff9dd; color: #695500; font-size: 12px; line-height: 1.45; }
 .appointment-calendar { margin-top: 13px; padding: 13px; border: 1px solid #d2dee4; }
 .appointment-calendar > header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .appointment-calendar > header button { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid #d2dce2; background: #fff; color: #00558c; cursor: pointer; }
@@ -170,8 +176,32 @@
 .situation-qr { display: grid; justify-items: center; margin-top: 13px; padding: 14px; background: #f5f8fa; color: #00558c; }
 .situation-qr > span { margin: 5px 0 12px; font-size: 11px; font-weight: 800; }
 .situation-qr dl { width: 100%; margin: 0; }
+.id-reason-list, .id-speed-grid { display: grid; gap: 8px; }
+.id-reason-list button, .id-speed-grid button { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; width: 100%; padding: 12px; border: 1px solid #cbd8df; background: #fff; color: #34424a; cursor: pointer; text-align: left; }
+.id-reason-list button > span:nth-child(2), .id-speed-grid button > span { display: grid; gap: 3px; }
+.id-reason-list small, .id-speed-grid small { color: #68767e; line-height: 1.35; }
+.id-reason-list button.is-active, .id-speed-grid button.is-active { border-color: #00558c; background: #eef6fb; color: #00558c; box-shadow: inset 3px 0 0 #00558c; }
+.id-choice-radio { display: grid; place-items: center; width: 24px; height: 24px; border: 2px solid #91a6b2; border-radius: 50%; }
+.id-reason-list button.is-active .id-choice-radio { border-color: #00558c; background: #00558c; color: #fff; }
+.id-speed-grid { grid-template-columns: repeat(3, 1fr); }
+.id-speed-grid button { grid-template-columns: auto minmax(0, 1fr); align-items: start; }
+.id-speed-grid button > svg:last-child { grid-column: 2; }
+.id-warning { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; padding: 12px; border-left: 3px solid #b5523e; background: #fff1ed; color: #8d3527; }
+.id-warning--info { border-left-color: #e3ad00; background: #fff9dd; color: #695500; }
+.id-warning > svg { flex: 0 0 auto; }
+.id-warning span { display: grid; gap: 3px; }
+.id-warning small { color: #6e5d59; line-height: 1.45; }
+.id-checklist { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.id-checklist li { display: flex; gap: 9px; align-items: center; padding: 11px 12px; background: #f3f8fa; color: #3c555f; }
+.id-checklist svg { flex: 0 0 auto; color: #18734a; }
+.id-empty-step { display: flex; gap: 12px; align-items: center; padding: 18px; background: #f3f6f7; color: #718087; }
+.id-empty-step span { display: grid; gap: 3px; }
+.id-submit-hint { margin: -6px 0 0; color: #6d7980; font-size: 12px; text-align: center; }
+.appointment-without.is-active { padding: 9px 11px; background: #eef6fb; }
+.id-summary .situation-payment__details strong { line-height: 1.35; }
+.id-payment-title { margin: 16px 0 -5px !important; color: #34434b !important; font-size: 12px !important; font-weight: 900; }
 @media (max-width: 850px) { .situation-layout { grid-template-columns: 1fr; } .situation-payment { position: static; grid-row: 1; } }
-@media (max-width: 650px) { .situation-page { padding: 26px 14px 50px; } .situation-hero { grid-template-columns: 1fr; padding: 25px 22px; } .situation-facts { grid-template-columns: 1fr; } .situation-facts > span { border-right: 0; border-bottom: 1px solid #e0e8ec; } .situation-explainer { grid-template-columns: auto 1fr; } .situation-explainer details { grid-column: 2; text-align: left; } .situation-fields, .situation-choice-grid, .dog-registration-home { grid-template-columns: 1fr; } .situation-success { padding: 35px 20px; } }
+@media (max-width: 650px) { .situation-page { padding: 26px 14px 50px; } .situation-hero { grid-template-columns: 1fr; padding: 25px 22px; } .situation-facts { grid-template-columns: 1fr; } .situation-facts > span { border-right: 0; border-bottom: 1px solid #e0e8ec; } .situation-explainer { grid-template-columns: auto 1fr; } .situation-explainer details { grid-column: 2; text-align: left; } .situation-fields, .situation-choice-grid, .dog-registration-home, .id-speed-grid { grid-template-columns: 1fr; } .situation-success { padding: 35px 20px; } }
 
 @media (max-width: 650px) {
   .situation-step, .situation-more { padding: 18px; }

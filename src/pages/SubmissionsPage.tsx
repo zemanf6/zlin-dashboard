@@ -10,6 +10,8 @@ import {
   Inbox,
   MessageSquareText,
   Paperclip,
+  CreditCard,
+  QrCode,
   RotateCcw,
   Trash2,
   XCircle,
@@ -29,9 +31,22 @@ type Submission = {
   document: string;
   department?: string;
   resolution?: string;
+  fee?: number;
+  paymentStatus?: "unpaid" | "paid" | "office";
 };
 
 const initialSubmissions: Submission[] = [
+  {
+    id: "OP-2026-008126",
+    title: "Příprava žádosti o občanský průkaz",
+    category: "Osobní doklady",
+    submittedAt: "22. 7. 2026 v 14:35",
+    status: "visit",
+    document: "souhrn-pripravy.pdf",
+    department: "Osobní doklady, L. Váchy 602",
+    fee: 500,
+    paymentStatus: "unpaid",
+  },
   {
     id: "EO-2026-008041",
     title: "Příprava změny trvalého pobytu",
@@ -40,6 +55,8 @@ const initialSubmissions: Submission[] = [
     status: "visit",
     document: "najemni-smlouva.pdf",
     department: "Evidence obyvatel, L. Váchy 602",
+    fee: 50,
+    paymentStatus: "office",
   },
   {
     id: "OD-2026-007183",
@@ -182,7 +199,7 @@ export function SubmissionsPage() {
             {selected.status === "visit" && (
               <div className="submission-detail__notice submission-detail__notice--visit">
                 <CalendarDays size={20} />
-                <div><strong>Online příprava je hotová</strong><span>Změnu dokončíte osobně na evidenci obyvatel, L. Váchy 602. Máte rezervovaný termín 28. 7. 2026 v 10:20.</span></div>
+                <div><strong>Online příprava je hotová</strong><span>{selected.id.startsWith("OP-") ? "Žádost dokončíte na pracovišti osobních dokladů, L. Váchy 602. Máte rezervovaný termín 4. 8. 2026 v 10:20." : "Změnu dokončíte osobně na evidenci obyvatel, L. Váchy 602. Máte rezervovaný termín 4. 8. 2026 v 10:20."}</span></div>
               </div>
             )}
             {selected.status === "approved" && (
@@ -224,6 +241,13 @@ export function SubmissionsPage() {
               {selected.department && <div><span>Odpovědné pracoviště</span><strong>{selected.department}</strong></div>}
             </div>
 
+            {selected.fee !== undefined && selected.fee > 0 && <div className="submission-section submission-payment">
+              <h3><CreditCard size={19} /> Správní poplatek</h3>
+              <div className="submission-payment__summary"><span><small>Částka</small><strong>{selected.fee.toLocaleString("cs-CZ")} Kč</strong></span>{selected.paymentStatus === "paid" && <span className="submission-payment__status submission-payment__status--paid">Uhrazeno</span>}</div>
+              {selected.paymentStatus !== "paid" && <><p>Poplatek můžete uhradit předem pomocí těchto údajů. Pokud chcete platit až na přepážce, nemusíte nic dělat.</p><div className="submission-payment__qr"><QrCode size={132} strokeWidth={1.35} /><div><strong>Naskenujte v bankovní aplikaci</strong><dl><div><dt>Částka</dt><dd>{selected.fee.toLocaleString("cs-CZ")} Kč</dd></div><div><dt>Účet města</dt><dd>000000-123456789 / 0800</dd></div><div><dt>Variabilní symbol</dt><dd>0201154470</dd></div><div><dt>Zpráva</dt><dd>{selected.id.startsWith("OP-") ? "Občanský průkaz" : "Změna trvalého pobytu"}</dd></div></dl></div></div></>}
+              {selected.paymentStatus === "paid" && <div className="submission-payment__confirmation"><CheckCircle2 size={20} /><span><strong>Poplatek je uhrazený</strong><small>Platbu evidujeme u tohoto podání.</small></span></div>}
+            </div>}
+
             <div className="submission-section">
               <h3><Paperclip size={19} /> Přiložené dokumenty</h3>
               <button className="submission-document" type="button">
@@ -236,7 +260,7 @@ export function SubmissionsPage() {
             <div className="submission-section">
               <h3><MessageSquareText size={19} /> Komunikace a průběh</h3>
               <ol className="submission-timeline">
-                {selected.status === "visit" && <li className="submission-timeline__office"><i /><div><strong>Čeká na osobní dokončení</strong><span>Termín 28. 7. 2026 v 10:20</span><p>Údaje a dokument byly předány evidenci obyvatel. Na přepážce prokážete totožnost a podepíšete přihlašovací lístek.</p></div></li>}
+                {selected.status === "visit" && <li className="submission-timeline__office"><i /><div><strong>Čeká na osobní dokončení</strong><span>Termín 4. 8. 2026 v 10:20</span><p>{selected.id.startsWith("OP-") ? "Příprava žádosti a rezervace byly uloženy." : "Údaje a dokument byly předány evidenci obyvatel."}</p></div></li>}
                 {selected.status === "ready" && <li className="submission-timeline__office"><i /><div><strong>Doklad je připraven k vyzvednutí</strong><span>21. 7. 2026 v 11:20</span><p>Řidičský průkaz je uložen na pracovišti L. Váchy 602.</p></div></li>}
                 {selected.status === "approved" && <li className="submission-timeline__office"><i /><div><strong>Úleva byla schválena</strong><span>18. 2. 2026 v 11:45</span><p>Doklady jsme ověřili a nárok na snížení sazby byl uznán.</p></div></li>}
                 {selected.status === "withdrawn" && <li><i /><div><strong>Podání staženo žadatelem</strong><span>Dnes v 15:06</span></div></li>}

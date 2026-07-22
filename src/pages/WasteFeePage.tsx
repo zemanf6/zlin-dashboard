@@ -66,7 +66,7 @@ const feeOptions: Record<FeeVariant, FeeOption> = {
     label: "Úleva 300 Kč",
     amount: 600,
     description:
-      "Pro seniory, vybrané studenty nebo osoby přihlášené mimo dostupná místa svozu.",
+      "Pro osoby 65+, studenty ve věku 19–26 let v prezenčním studiu mimo Zlínský kraj a osoby mimo dostupná místa svozu.",
     detailsTitle: "Úleva ve výši 300 Kč",
     details: [
       "Úleva ve výši 300 Kč ze sazby poplatku se poskytne osobě, které poplatková povinnost vznikla z důvodu přihlášení ve městě a která dosáhla věku 65 let.",

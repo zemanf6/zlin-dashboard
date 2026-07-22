@@ -14,6 +14,7 @@ import { DogRegistrationPage } from "./pages/DogRegistrationPage";
 import { BoardPage } from "./pages/BoardPage";
 import { NotificationsProvider } from "./context/NotificationsContext";
 import { LoginPage } from "./pages/LoginPage";
+import { IdCardSituationPage } from "./pages/IdCardSituationPage";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -57,6 +58,7 @@ export default function App() {
             <Route path="/nahlasit-problem" element={<CityReportPage />} />
             <Route path="/zivotni-situace" element={<LifeSituationsPage />} />
             <Route path="/zivotni-situace/stehuji-se" element={<MovingSituationPage />} />
+            <Route path="/zivotni-situace/novy-obcansky-prukaz" element={<IdCardSituationPage />} />
             <Route path="/zivotni-situace/poridil-jsem-si-psa" element={<DogRegistrationPage />} />
             <Route path="/prihlaseni" element={<Navigate to="/" replace />} />
             <Route path="*" element={<Navigate to="/" replace />} />
